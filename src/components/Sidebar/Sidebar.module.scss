@@ -1,0 +1,157 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: rgba(13, 30, 41, 0.4);
+  position: relative;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  &__field {
+    display: flex;
+    position: relative;
+    width: 80%;
+    &:hover {
+      cursor: pointer;
+    }
+    i {
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      color: #fff;
+    }
+    input {
+      padding: 10px 10px 10px 30px;
+      color: #fff;
+      background: none;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  &__btn {
+    background: #fff;
+    padding: 10px;
+    display: block;
+    border: none;
+    position: absolute;
+    right: 20px;
+    border-radius: 50%;
+    i {
+      font-size: 20px;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.dropdown {
+  position: relative;
+  &__content {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    left: 10px;
+    bottom: -20px;
+    background: transparent;
+    border-radius: 20px;
+    li {
+      overflow: hidden;
+      list-style: none;
+      background: transparent;
+      color: #f8f8ff;
+      border-radius: 20px;
+      margin-bottom: 5px;
+      padding: 10px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+.info {
+  display: flex;
+  align-items: flex-end;
+  align-items: center;
+  margin: 20px 0;
+  h1 {
+    font-size: 50px;
+    margin: 0;
+    margin-right: 10px;
+  }
+  div {
+    padding-bottom: 5px;
+    h3 {
+      margin: 0;
+      font-size: 26px;
+    }
+    p {
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+}
+.icon {
+  width: 100px;
+  height: 100px;
+  display: block;
+  width: 120px;
+  height: 100px;
+}
+.title {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #f8f8ff;
+}
+.city {
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #f8f8ff;
+}
+
+.date {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f8f8ff;
+}
+.clouds {
+  border-bottom: 1px solid #fff;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  p {
+    color: #f8f8ff;
+  }
+  ul {
+    padding: 0 0 0 10px;
+    li {
+      color: #f8f8ff;
+      list-style: none;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .sidebar {
+    position: absolute;
+    left: -820px;
+  }
+  .activeSidebar {
+    left: 0;
+    z-index: 1000;
+    background: rgba(13, 30, 41, 0.8);
+    min-height: 100%;
+    padding-top: 100px;
+  }
+}

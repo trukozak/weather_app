@@ -1,0 +1,142 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  padding-left: 50px;
+  &__content {
+    display: flex;
+    padding-top: 15px;
+  }
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__view {
+    display: flex;
+    p {
+      margin-right: 25px;
+      font-size: 20px;
+      color: #fff;
+      border-radius: 20px;
+      padding: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .active {
+      font-weight: bold;
+    }
+  }
+  .activeType {
+    background: #f8f8f8;
+    color: #000;
+    border-radius: 20px;
+    padding: 20px;
+    font-weight: bold;
+  }
+  &__temperature {
+    display: flex;
+    p {
+      margin-right: 15px;
+      font-size: 20px;
+      border-radius: 50%;
+      padding: 10px 15px;
+      color: #f8f8f8;
+      border: 1px solid #f8f8f8;
+      text-align: center;
+      border-radius: 20px;
+      padding: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .activeTemp {
+      background: #f8f8f8;
+      color: #000;
+      font-weight: bold;
+    }
+  }
+}
+/* BURGER  */
+.burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50px;
+  height: 30px;
+  display: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.burger .dash {
+  width: 50px;
+  height: 5px;
+  background: #f8f8f8;
+  border-radius: 20px;
+  transition: 0.25s;
+}
+.burger .dash:nth-of-type(3) {
+  position: absolute;
+  top: 33px;
+}
+.activebrgr {
+  z-index: 1001;
+}
+.activebrgr .dash:nth-of-type(1) {
+  opacity: 0;
+}
+.activebrgr .dash:nth-of-type(4) {
+  opacity: 0;
+}
+.activebrgr .dash:nth-of-type(3) {
+  transform: rotate(45deg);
+}
+.activebrgr .dash:nth-of-type(2) {
+  transform: rotate(-45deg);
+}
+@media screen and (max-width: 1024px) {
+  .header {
+    padding: 0;
+  }
+  .burger {
+    display: flex;
+  }
+  .burger .dash:nth-of-type(3) {
+    position: absolute;
+    top: 52px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .btns {
+    &__view {
+      p {
+        font-size: 14px;
+        padding: 10px;
+        display: flex;
+      }
+    }
+    .activeType {
+      padding: 10px;
+    }
+    &__temperature {
+      p {
+        font-size: 14px;
+        padding: 10px;
+        display: flex;
+      }
+    }
+  }
+  .burger .dash {
+    width: 40px;
+  }
+  .burger .dash:nth-of-type(3) {
+    position: absolute;
+    top: 32px;
+  }
+}

@@ -1,3 +1,4 @@
+import { IDaily, IHourly } from '../../app/type/weatherTypes';
 import {
   formatDay,
   formatDays,
@@ -6,7 +7,14 @@ import {
 } from '../../utils/utils';
 import s from './Frame.module.scss';
 
-const Frame = ({ hourly, daily, tempType, timezone }) => {
+type FrameProps = {
+  hourly?: IHourly;
+  daily?: IDaily;
+  tempType: boolean;
+  timezone: string;
+};
+
+const Frame = ({ hourly, daily, tempType, timezone }: FrameProps) => {
   return (
     <div className={s.frame}>
       {hourly && (

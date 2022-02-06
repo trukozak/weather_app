@@ -1,19 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  Key,
+  ReactChild,
+  ReactFragment,
+  ReactPortal,
+  useEffect,
+  useState,
+} from 'react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { ToastContainer, toast } from 'react-toastify';
 import { setPlaceRequest } from '../../app/weather/WeatherSlice';
 import { formatDay } from '../../utils/utils';
 import s from './Sidebar.module.scss';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { ICoord } from '../../app/type/weatherTypes';
 
-const Sidebar = ({ sidebarOpened }) => {
-  const { weather, currentName } = useSelector(state => state.weatherReducer);
+interface SidebarProps {
+  sidebarOpened: boolean;
+}
+
+const Sidebar = ({ sidebarOpened }: SidebarProps) => {
+  const { weather, currentName } = useAppSelector(
+    state => state.weatherReducer,
+  );
   const [address, setAddress] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const getUserLocation = () => {
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -39,17 +53,17 @@ const Sidebar = ({ sidebarOpened }) => {
   }, [currentName]);
 
   const onError = () => {
-    if (window.google.maps.places.PlacesServiceStatus !== 'OK') {
+    if (window.google.maps.places.PlacesServiceStatus) {
       toast.error('Invalid data');
     }
   };
 
-  const handleSelect = async value => {
+  const handleSelect = async (value: any) => {
     geocodeByAddress(value)
-      .then(results => {
+      .then((results: any[]) => {
         return getLatLng(results[0]);
       })
-      .then(latLng => {
+      .then((latLng: ICoord) => {
         toast.error(latLng);
         dispatch(setPlaceRequest(latLng));
       })
@@ -82,27 +96,37 @@ const Sidebar = ({ sidebarOpened }) => {
 
                 <ul className={s.dropdown__content}>
                   {loading ? <div>...loading</div> : null}
-                  {suggestions.map(suggestion => {
-                    const s = suggestion.active
-                      ? {
-                          color: '#808080',
-                          cursor: 'pointer',
-                          lists: 'none',
-                        }
-                      : {
-                          backgroundColor: 'transparent',
-                          cursor: 'pointer',
-                          lists: 'none',
-                        };
-                    return (
-                      <li
-                        key={suggestion.placeId}
-                        {...getSuggestionItemProps(suggestion, { s })}
-                      >
-                        {suggestion.description}
-                      </li>
-                    );
-                  })}
+                  {suggestions.map(
+                    (suggestion: {
+                      active: any;
+                      placeId: Key;
+                      description:
+                        | boolean
+                        | ReactChild
+                        | ReactFragment
+                        | ReactPortal;
+                    }) => {
+                      const s = suggestion.active
+                        ? {
+                            color: '#808080',
+                            cursor: 'pointer',
+                            lists: 'none',
+                          }
+                        : {
+                            backgroundColor: 'transparent',
+                            cursor: 'pointer',
+                            lists: 'none',
+                          };
+                      return (
+                        <li
+                          key={suggestion.placeId}
+                          {...getSuggestionItemProps(suggestion, { s })}
+                        >
+                          {suggestion.description}
+                        </li>
+                      );
+                    },
+                  )}
                 </ul>
               </div>
             )}

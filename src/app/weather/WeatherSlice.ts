@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ICoord, IWeatherAll } from '../type/weatherTypes';
 
 const initialState = {
   weather: null,
@@ -14,16 +15,16 @@ export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
   reducers: {
-    setPlaceRequest(state, action) {
+    setPlaceRequest(state, action: PayloadAction<ICoord>) {
       state.placeRequest = action.payload;
     },
-    setLoading(state, action) {
+    setLoading(state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
-    setWeather(state, action) {
+    setWeather(state, action: PayloadAction<IWeatherAll>) {
       state.weather = action.payload;
     },
-    setCurrentName(state, action) {
+    setCurrentName(state, action: PayloadAction<string>) {
       state.currentName = action.payload;
     },
   },

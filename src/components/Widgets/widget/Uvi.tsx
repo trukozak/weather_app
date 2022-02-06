@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../hooks/hooks';
 import { uviIndex } from '../../../utils/utils';
 import s from '../Widgets.module.scss';
 
 const Uvi = () => {
-  const { weather } = useSelector(state => state.weatherReducer);
+  const { weather } = useAppSelector(state => state.weatherReducer);
   return (
     <div className={s.frame}>
       <h3>UV index</h3>

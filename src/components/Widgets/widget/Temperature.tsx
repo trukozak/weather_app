@@ -1,10 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../hooks/hooks';
 import s from '../Widgets.module.scss';
 import maxTemp from '../../../images/hot.png';
 import minTemp from '../../../images/cold.png';
 
 const Temperature = () => {
-  const { weather } = useSelector(state => state.weatherReducer);
+  const { weather } = useAppSelector(state => state.weatherReducer);
   return (
     <div className={s.frame}>
       <h3>Min & Max temperature</h3>

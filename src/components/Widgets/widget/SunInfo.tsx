@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../hooks/hooks';
 import { sunInformation } from '../../../utils/utils';
 import s from '../Widgets.module.scss';
 import sunriseIcon from '../../../images/sunrise.png';
 import sunsetIcon from '../../../images/sunset.png';
 
 const SunInfo = () => {
-  const { weather } = useSelector(state => state.weatherReducer);
+  const { weather } = useAppSelector(state => state.weatherReducer);
   return (
     <div className={s.frame}>
       <h3>Sunrise & Sunset</h3>

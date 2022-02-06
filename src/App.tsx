@@ -1,5 +1,4 @@
 import { useCallback, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import {
   useFetchOneCallApiQuery,
@@ -9,12 +8,13 @@ import { setCurrentName, setWeather } from './app/weather/WeatherSlice';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import Widgets from './components/Widgets/Widgets';
+import { useAppDispatch, useAppSelector } from './hooks/hooks';
 
 const App = () => {
-  const { placeRequest } = useSelector(state => state.weatherReducer);
+  const { placeRequest } = useAppSelector(state => state.weatherReducer);
   const { data: oneCall, isLoading } = useFetchOneCallApiQuery(placeRequest);
   const { data: singleDay } = useFetchCurWeatherQuery(placeRequest);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [map, setMap] = useState(null);
 

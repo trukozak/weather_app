@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import Slider from 'react-slick';
+import { useAppSelector } from '../../hooks/hooks';
 import Frame from '../Frame/Frame';
 import { sliderSettings as settings } from '../../utils/utils';
 import s from './Header.module.scss';
 
-const Header = ({ sidebarOpened, setSidebarOpened }) => {
-  const { weather } = useSelector(state => state.weatherReducer);
+interface HeaderProps {
+  setSidebarOpened: (value: boolean) => void;
+  sidebarOpened: boolean;
+}
+
+const Header = ({ sidebarOpened, setSidebarOpened }: HeaderProps) => {
+  const { weather } = useAppSelector(state => state.weatherReducer);
   const [view, setView] = useState(true);
   const [tempType, setTempType] = useState(true);
   return (

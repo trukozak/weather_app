@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../hooks/hooks';
 import s from '../Widgets.module.scss';
 
 const Visibility = () => {
-  const { weather } = useSelector(state => state.weatherReducer);
+  const { weather } = useAppSelector(state => state.weatherReducer);
   return (
     <div className={s.frame}>
       <h3>Visibility</h3>

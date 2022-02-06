@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../hooks/hooks';
 import { humudityPer } from '../../../utils/utils';
 import s from '../Widgets.module.scss';
 
 const Humidity = () => {
-  const { weather } = useSelector(state => state.weatherReducer);
+  const { weather } = useAppSelector(state => state.weatherReducer);
   return (
     <div className={s.frame}>
       <h3>Humidity</h3>

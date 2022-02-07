@@ -6,10 +6,6 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 yarn.lock*
-netlify.toml
-.netlify/
-tsconfig.json
-
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -40,7 +36,7 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/
+build/Release
 
 # Dependency directories
 node_modules/
@@ -109,5 +105,3 @@ dist
 
 # TernJS port file
 .tern-port
-# Local Netlify folder
-.netlify

@@ -4,4 +4,4 @@
 
 ![img](http://joxi.ru/E2pZMbqTvOxRpr.jpg)
 
-## [Link](https://av-weather-app.netlify.app/)
+## [Link](https://weather-app-av.netlify.app/)

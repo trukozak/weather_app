@@ -1,7 +1,8 @@
 //* LIbs
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import { toast } from 'react-hot-toast';
+import { Audio } from 'react-loader-spinner';
 
 //* Reducers
 import { setPlaceRequest } from 'app/weather/WeatherSlice';
@@ -52,7 +53,7 @@ const AutocompleteCountry = ({ currentName }: FrameProps) => {
       <input {...getInputProps({ placeholder: 'Type address' })} />
 
       <ul className={s.dropdown__content}>
-        {loading ? <div>...loading</div> : null}
+        {loading ? <Audio color="#7ca2b1" height={50} width={50} /> : null}
         {suggestions.map(suggestion => {
           const style = suggestion.active ? autoCompleteStyleActive : autoCompleteStyle;
           return (
@@ -77,4 +78,4 @@ const AutocompleteCountry = ({ currentName }: FrameProps) => {
   );
 };
 
-export default AutocompleteCountry;
+export default memo(AutocompleteCountry);

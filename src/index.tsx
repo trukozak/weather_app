@@ -10,9 +10,8 @@ import App from './App';
 import { store } from 'app/store';
 
 //* Styles
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import './index.scss';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 ReactDOM.render(
   <React.StrictMode>

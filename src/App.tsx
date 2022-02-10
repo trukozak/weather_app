@@ -26,7 +26,7 @@ const MapComponent = lazy(() => import('components/Map'));
 
 const App = () => {
   const { placeRequest } = useAppSelector(weatherSelector);
-  const { data: oneCall, isLoading } = useFetchOneCallApiQuery(placeRequest);
+  const { data: oneCall, isLoading, isFetching } = useFetchOneCallApiQuery(placeRequest);
   const { data: singleDay } = useFetchCurWeatherQuery(placeRequest);
   const dispatch = useAppDispatch();
   const [sidebarOpened, setSidebarOpened] = useState(false);
@@ -45,7 +45,11 @@ const App = () => {
         <>
           <SidebarComponent sidebarOpened={sidebarOpened} />
           <div className="content">
-            <HeaderComponent setSidebarOpened={setSidebarOpened} sidebarOpened={sidebarOpened} />
+            <HeaderComponent
+              setSidebarOpened={setSidebarOpened}
+              sidebarOpened={sidebarOpened}
+              isLoading={isFetching}
+            />
             <h2 className="page-title">Todays Highlights</h2>
             <div className="container__content">
               <WidgetsComponent />

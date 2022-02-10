@@ -1,5 +1,6 @@
 //* Libs
 import cs from 'classnames';
+import { memo } from 'react';
 
 //* Selectors
 import { weatherSelector } from 'app/weather/WeatherSlice';
@@ -44,4 +45,4 @@ const Sidebar = ({ sidebarOpened }: SidebarProps) => {
   );
 };
 
-export default Sidebar;
+export default memo(Sidebar);

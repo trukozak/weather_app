@@ -1,9 +1,19 @@
-import { useAppSelector } from '../../../hooks/hooks';
-import { humudityPer } from '../../../utils/utils';
+//* Selectors
+import { weatherSelector } from 'app/weather/WeatherSlice';
+
+//* Hooks
+import { useAppSelector } from 'hooks';
+
+//* Utils
+import { humudityPer } from 'utils';
+
+//* Style
 import s from '../Widgets.module.scss';
 
 const Humidity = () => {
-  const { weather } = useAppSelector(state => state.weatherReducer);
+  const { weather } = useAppSelector(weatherSelector);
+  const { current } = weather;
+
   return (
     <div className={s.frame}>
       <h3>Humidity</h3>
@@ -11,14 +21,14 @@ const Humidity = () => {
         <div className={s.humudity}>
           <div className={s.humudity__percent}>
             <p>
-              <span>{weather.current.humidity}</span> %
+              <span>{current.humidity}</span> %
             </p>
-            <p>{humudityPer(weather.current.humidity)}</p>
+            <p>{humudityPer(current.humidity)}</p>
           </div>
           <div className={s.frame__humudity}>
             <div
               style={{
-                background: `linear-gradient(360deg, #08E ${weather.current.humidity}%, #fff 50%)`,
+                background: `linear-gradient(360deg, #08E ${current.humidity}%, #fff 50%)`,
               }}
             ></div>
           </div>

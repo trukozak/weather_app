@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Pattaya&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-image: url('../images/weatherbg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+code {
+  font-family: 'Courier New', monospace;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 20% 70%;
+  min-height: 100vh;
+
+  &__content {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 300px;
+    padding-bottom: 30px;
+  }
+}
+
+.page-title {
+  font-size: 30px;
+  color: #fff;
+}
+
+.content {
+  padding-left: 50px;
+
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+}
+
+.slick-slider {
+  overflow: hidden;
+  padding: 0 0 0 40px;
+}
+
+.slick-next {
+  position: absolute;
+  right: 10px;
+  z-index: 9999;
+
+  &::before {
+    content: '\2B9E';
+    font-size: 30px;
+  }
+}
+
+.slick-prev {
+  position: absolute;
+  left: 0;
+  z-index: 9999;
+
+  &::before {
+    content: '\2B9C';
+    font-size: 30px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@include for-tablet-landscape-up {
+  .container {
+    position: relative;
+    display: block;
+
+    &__content {
+      display: grid;
+      grid-template-columns: unset;
+      grid-template-rows: 1fr 1fr;
+    }
+  }
+
+  .content {
+    padding: 0 20px;
+  }
+}
+
+#mdiv {
+  position: relative;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  width: 99vw;
+  height: 100vh;
+  background-color: #000;
+}
+
+.cdiv {
+  width: 15rem;
+  height: 15rem;
+}
+
+.rot {
+  position: absolute;
+  border-right: 0.3rem solid #fff;
+  border-radius: 50%;
+  width: 15rem;
+  height: 15rem;
+  animation: pre 2s linear infinite;
+}
+
+@keyframes pre {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.lh {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-family: 'Pattaya', sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  transform: translate(-50%, -50%);
+}
+
+@include for-phone-only {
+  .googleMap {
+    height: 300px;
+  }
+
+  .container {
+    &__content {
+      grid-template-rows: unset;
+    }
+  }
+}

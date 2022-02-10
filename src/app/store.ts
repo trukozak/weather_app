@@ -1,5 +1,10 @@
+//* Libs
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import { weatherAPI } from '../services/WeatherServices';
+
+//* Servises
+import { weatherAPI } from 'services/WeatherServices';
+
+//* WeatherReducer
 import { weatherReducer } from './weather/WeatherSlice';
 
 export const store = configureStore({
@@ -7,10 +12,7 @@ export const store = configureStore({
     weatherReducer,
     [weatherAPI.reducerPath]: weatherAPI.reducer,
   },
-  middleware: getDefaultMiddleware => [
-    ...getDefaultMiddleware(),
-    weatherAPI.middleware,
-  ],
+  middleware: getDefaultMiddleware => [...getDefaultMiddleware(), weatherAPI.middleware],
 });
 
 export type AppDispatch = typeof store.dispatch;

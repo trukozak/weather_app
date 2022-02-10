@@ -1,3 +1,4 @@
+//* Libs
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
@@ -42,9 +43,7 @@ export const humudityPer = humidity => {
 export const sunInformation = time => {
   return !time
     ? new Date()
-    : new Date(time * 1000).getHours() +
-        ':' +
-        new Date(time * 1000).getMinutes();
+    : new Date(time * 1000).getHours() + ':' + new Date(time * 1000).getMinutes();
 };
 
 export const uviIndex = uvi => {
@@ -99,4 +98,24 @@ export const sliderSettings = {
       },
     },
   ],
+};
+
+export const mapContainerStyle = {
+  width: '100%',
+  height: '100%',
+  borderRadius: '30px',
+};
+
+export const baseImgUrl = 'http://openweathermap.org/img/wn/';
+
+export const autoCompleteStyle = {
+  backgroundColor: 'transparent',
+  cursor: 'pointer',
+  lists: 'none',
+};
+
+export const autoCompleteStyleActive = {
+  color: '#808080',
+  cursor: 'pointer',
+  lists: 'none',
 };

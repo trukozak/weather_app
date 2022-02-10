@@ -1,140 +1,164 @@
+@import 'style/global-mixins';
+
 .header {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
   padding-left: 50px;
+
   &__content {
     display: flex;
     padding-top: 15px;
   }
 }
+
 .btns {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   &__view {
     display: flex;
+
     p {
       margin-right: 25px;
+      border-radius: 20px;
+      padding: 20px;
       font-size: 20px;
       color: #fff;
-      border-radius: 20px;
-      padding: 20px;
 
       &:hover {
         cursor: pointer;
       }
     }
+
     .active {
-      font-weight: bold;
+      font-weight: 700;
     }
   }
+
   .activeType {
-    background: #f8f8f8;
-    color: #000;
     border-radius: 20px;
     padding: 20px;
-    font-weight: bold;
+    font-weight: 700;
+    color: #000;
+    background: #f8f8f8;
   }
+
   &__temperature {
     display: flex;
+
     p {
       margin-right: 15px;
-      font-size: 20px;
-      border-radius: 50%;
-      padding: 10px 15px;
-      color: #f8f8f8;
       border: 1px solid #f8f8f8;
-      text-align: center;
       border-radius: 20px;
       padding: 20px;
+      font-size: 20px;
+      text-align: center;
+      color: #f8f8f8;
 
       &:hover {
         cursor: pointer;
       }
     }
+
     .activeTemp {
-      background: #f8f8f8;
+      font-weight: 700;
       color: #000;
-      font-weight: bold;
+      background: #f8f8f8;
     }
   }
 }
+
 /* BURGER  */
+
 .burger {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-between;
   width: 50px;
   height: 30px;
-  display: none;
 
   &:hover {
     cursor: pointer;
   }
 }
+
 .burger .dash {
+  border-radius: 20px;
   width: 50px;
   height: 5px;
   background: #f8f8f8;
-  border-radius: 20px;
   transition: 0.25s;
 }
+
 .burger .dash:nth-of-type(3) {
   position: absolute;
   top: 33px;
 }
+
 .activebrgr {
   z-index: 1001;
 }
+
 .activebrgr .dash:nth-of-type(1) {
   opacity: 0;
 }
+
 .activebrgr .dash:nth-of-type(4) {
   opacity: 0;
 }
+
 .activebrgr .dash:nth-of-type(3) {
   transform: rotate(45deg);
 }
+
 .activebrgr .dash:nth-of-type(2) {
   transform: rotate(-45deg);
 }
-@media screen and (max-width: 1024px) {
+
+@include for-tablet-landscape-up {
   .header {
     padding: 0;
   }
+
   .burger {
     display: flex;
   }
+
   .burger .dash:nth-of-type(3) {
     position: absolute;
     top: 52px;
   }
 }
-@media screen and (max-width: 480px) {
+
+@include for-phone-only {
   .btns {
     &__view {
       p {
-        font-size: 14px;
-        padding: 10px;
         display: flex;
+        padding: 10px;
+        font-size: 14px;
       }
     }
+
     .activeType {
       padding: 10px;
     }
+
     &__temperature {
       p {
-        font-size: 14px;
-        padding: 10px;
         display: flex;
+        padding: 10px;
+        font-size: 14px;
       }
     }
   }
+
   .burger .dash {
     width: 40px;
   }
+
   .burger .dash:nth-of-type(3) {
     position: absolute;
     top: 32px;

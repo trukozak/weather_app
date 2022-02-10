@@ -1,9 +1,19 @@
-import { useAppSelector } from '../../../hooks/hooks';
-import { uviIndex } from '../../../utils/utils';
+//* Selectors
+import { weatherSelector } from 'app/weather/WeatherSlice';
+
+//* Hooks
+import { useAppSelector } from 'hooks';
+
+//* Utils
+import { uviIndex } from 'utils';
+
+//* Style
 import s from '../Widgets.module.scss';
 
 const Uvi = () => {
-  const { weather } = useAppSelector(state => state.weatherReducer);
+  const { weather } = useAppSelector(weatherSelector);
+  const { current } = weather;
+
   return (
     <div className={s.frame}>
       <h3>UV index</h3>
@@ -13,14 +23,9 @@ const Uvi = () => {
             <svg id="half-circle" viewBox="0 0 106 57" width="150">
               <defs>
                 <linearGradient id="orange-to-pink" x1="1" x2="0" y1="0" y2="0">
+                  <stop offset={`${uviIndex(current?.uvi)}`} stopColor="darkblue" />
                   <stop
-                    offset={`${uviIndex(weather?.current?.uvi)}`}
-                    stopColor="darkblue"
-                  />
-                  <stop
-                    offset={
-                      `${uviIndex(weather?.current?.uvi)}` === '0' ? 0 : 0.7
-                    }
+                    offset={`${uviIndex(current?.uvi)}` === '0' ? 0 : 0.7}
                     stopColor="#f8f8ff"
                   />
                 </linearGradient>
@@ -31,7 +36,7 @@ const Uvi = () => {
             <span className={s.secondIndex}>6</span>
             <span className={s.thirdIndex}>9</span>
             <span className={s.lastIndex}>12</span>
-            <span className={s.mainIndex}>{weather.current.uvi}</span>
+            <span className={s.mainIndex}>{current.uvi}</span>
           </div>
         </div>
       )}

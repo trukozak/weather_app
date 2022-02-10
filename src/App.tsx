@@ -1,84 +1,64 @@
-import { useCallback, useState, useEffect } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
-import {
-  useFetchOneCallApiQuery,
-  useFetchCurWeatherQuery,
-} from './services/WeatherServices';
-import { setCurrentName, setWeather } from './app/weather/WeatherSlice';
-import Header from './components/Header/Header';
-import Sidebar from './components/Sidebar/Sidebar';
-import Widgets from './components/Widgets/Widgets';
-import { useAppDispatch, useAppSelector } from './hooks/hooks';
+//* Why did you render
+import './wdyr';
+import { hot } from 'react-hot-loader/root';
+
+//* Libs
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { Toaster } from 'react-hot-toast';
+
+//* Services
+import { useFetchOneCallApiQuery, useFetchCurWeatherQuery } from 'services/WeatherServices';
+
+//* Selectors
+import { setCurrentName, setWeather, weatherSelector } from 'app/weather/WeatherSlice';
+
+//* Hooks
+import { useAppDispatch, useAppSelector } from 'hooks';
+
+// *Components
+import Loader from 'components/Loader';
+
+//* Lazy loading components
+const HeaderComponent = lazy(() => import('components/Header'));
+const SidebarComponent = lazy(() => import('components/Sidebar'));
+const WidgetsComponent = lazy(() => import('components/Widgets'));
+const MapComponent = lazy(() => import('components/Map'));
 
 const App = () => {
-  const { placeRequest } = useAppSelector(state => state.weatherReducer);
+  const { placeRequest } = useAppSelector(weatherSelector);
   const { data: oneCall, isLoading } = useFetchOneCallApiQuery(placeRequest);
   const { data: singleDay } = useFetchCurWeatherQuery(placeRequest);
   const dispatch = useAppDispatch();
   const [sidebarOpened, setSidebarOpened] = useState(false);
-  const [map, setMap] = useState(null);
 
   useEffect(() => {
     dispatch(setWeather(oneCall));
     dispatch(setCurrentName(`${singleDay?.name}, ${singleDay?.sys?.country}`));
   }, [dispatch, oneCall, singleDay]);
 
-  const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-    setMap(map);
-  }, []);
-
-  const onUnmount = useCallback(function callback() {
-    setMap(null);
-  }, []);
-
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className="container">
-      {isLoading && (
-        <div id="mdiv">
-          <div className="cdiv">
-            <div className="rot"></div>
-            <h1 className="lh">Loading</h1>
+      <Suspense fallback={<Loader />}>
+        <>
+          <SidebarComponent sidebarOpened={sidebarOpened} />
+          <div className="content">
+            <HeaderComponent setSidebarOpened={setSidebarOpened} sidebarOpened={sidebarOpened} />
+            <h2 className="page-title">Todays Highlights</h2>
+            <div className="container__content">
+              <WidgetsComponent />
+              <MapComponent />
+            </div>
           </div>
-        </div>
-      )}
-      <Sidebar sidebarOpened={sidebarOpened} />
-      <div className="content">
-        <Header
-          setSidebarOpened={setSidebarOpened}
-          sidebarOpened={sidebarOpened}
-        />
-        <h2 className="page-title">Today`s Highlights</h2>
-        <div className="container__content">
-          <Widgets />
-          <div className="googleMap">
-            <GoogleMap
-              mapContainerStyle={{
-                width: '100%',
-                height: '100%',
-                borderRadius: '30px',
-              }}
-              center={{
-                lat: placeRequest.lat,
-                lng: placeRequest.lng,
-              }}
-              zoom={11}
-              onLoad={onLoad}
-              onUnmount={onUnmount}
-            >
-              <Marker
-                position={{
-                  lat: placeRequest.lat,
-                  lng: placeRequest.lng,
-                }}
-              />
-            </GoogleMap>
-          </div>
-        </div>
-      </div>
+        </>
+        <Toaster position="top-right" />
+      </Suspense>
     </div>
   );
 };
 
-export default App;
+const HootApp = hot(App);
+
+export default HootApp;

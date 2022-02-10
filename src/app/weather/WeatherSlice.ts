@@ -1,7 +1,17 @@
+//* Libs
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+//* Types
 import { ICoord, IWeatherAll } from '../type/weatherTypes';
 
-const initialState = {
+interface WeatherState {
+  weather: IWeatherAll | null;
+  isLoading: boolean;
+  placeRequest: ICoord;
+  currentName: string;
+}
+
+const initialState: WeatherState = {
   weather: null,
   currentName: 'Kiev, UA',
   placeRequest: {
@@ -29,6 +39,6 @@ export const weatherSlice = createSlice({
     },
   },
 });
-export const { setPlaceRequest, setWeather, setCurrentName } =
-  weatherSlice.actions;
+export const { setPlaceRequest, setWeather, setCurrentName } = weatherSlice.actions;
+export const weatherSelector = state => state.weatherReducer;
 export const weatherReducer = weatherSlice.reducer;
